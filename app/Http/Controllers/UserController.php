@@ -6,6 +6,7 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Service\UserService;
+use Termwind\Components\Dd;
 
 class UserController extends Controller
 {
@@ -18,9 +19,14 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $users = $this->userService->index($request->all());
+            return response()->json($users, 200);
+        } catch (\Throwable $th) {
+           return response()->json($th, 500);
+        }
     }
 
     /**
@@ -71,9 +77,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // dd($user);
+        try {
+            $updatedUser = $this->userService->update($request->all(), $user);
+        } catch (\Throwable $th) {
+            return response()->json($th, 500);
+        }
     }
 
     /**

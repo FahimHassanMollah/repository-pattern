@@ -13,6 +13,11 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
+    public function index($data)
+    {
+        return $this->userRepository->index($data);
+    }
+
 
     public function store($data)
     {
@@ -21,6 +26,11 @@ class UserService
             return 'Email already exist';
         }
         return $this->userRepository->insert($data);
+    }
+
+    public function update($data,$user)
+    {
+       return $this->userRepository->update($data,$user);
     }
 
     public function isEmailExist($email)
