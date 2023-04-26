@@ -82,8 +82,10 @@ class UserController extends Controller
         // dd($user);
         try {
             $updatedUser = $this->userService->update($request->all(), $user);
+            return response()->json($updatedUser, 200);
+
         } catch (\Throwable $th) {
-            return response()->json($th, 500);
+            return response()->json($th->message, 500);
         }
     }
 

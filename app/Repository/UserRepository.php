@@ -20,9 +20,9 @@ class UserRepository
     {
         return  $this->user->create($data);
     }
-    public function update($data)
+    public function update($data,$user)
     {
-        return $this->user->update($data);
+        return $user->update($data);
     }
 }
 
