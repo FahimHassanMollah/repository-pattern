@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Service\UserService;
@@ -33,13 +34,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $validatation = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'password' => 'required|string',
-        ]);
+
         try {
             return  $this->userService->store($request->all());
         } catch (\Throwable $th) {
